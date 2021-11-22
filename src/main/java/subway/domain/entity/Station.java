@@ -1,9 +1,9 @@
-package subway.domain.line;
+package subway.domain.entity;
 
-public class Line {
+public class Station {
     private String name;
 
-    public Line(String name) {
+    public Station(String name) {
         this.name = name;
     }
 
