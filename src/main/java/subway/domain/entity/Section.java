@@ -21,6 +21,9 @@ public class Section {
     public void addStation(String stationName, int index) {
         this.stations.add(index, stationName);
     }
+    public void deleteStation(String stationName) {
+        stations.removeIf(station -> station.equals(stationName));
+    }
 
     public Section getSection() {
         return this;
