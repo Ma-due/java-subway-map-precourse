@@ -3,23 +3,34 @@ package subway.domain.entity;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Section {
-    private final List<String> stations = new LinkedList<>();
+    private final List<Station> stations;
 
-    public void addStation(List<String> stationList) {
-        stations.addAll(stationList);
+    private Section(List<Station> stations) {
+        this.stations = stations;
     }
 
-    public void addStation(String station, int index) {
+    public static Section of(Station firstStation, Station lastStation) {
+        List<Station> stations = Stream.of(firstStation, lastStation)
+                .collect(Collectors.toList());
+
+        return new Section(stations);
+    }
+
+    public void addStation(int index, Station station) {
         stations.add(index, station);
     }
 
-    public void removeStation(String station) {
+    public void removeStation(Station station) {
         stations.remove(station);
     }
 
-    public List<String> getStations () {
+    public List<Station> getStations () {
         return Collections.unmodifiableList(stations);
     }
+
+
 }

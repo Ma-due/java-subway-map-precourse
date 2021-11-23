@@ -1,13 +1,16 @@
 package subway.domain.entity;
 
-import java.util.List;
-
 public class Line {
     private final String name;
-    private final Section section = new Section();
+    private final Section section;
 
-    public Line(String name) {
+    public Line(String name, Section section) {
         this.name = name;
+        this.section = section;
+    }
+
+    public void addSection(int index, Station station) {
+        section.addStation(index, station);
     }
 
     public String getName() {
@@ -18,7 +21,7 @@ public class Line {
         return section;
     }
 
-    public List<String> getSectionList() {
-        return section.getStations();
+    public boolean matchesName(String name) {
+        return this.name.equals(name);
     }
 }
