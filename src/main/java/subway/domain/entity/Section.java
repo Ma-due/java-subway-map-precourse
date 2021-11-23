@@ -28,7 +28,7 @@ public class Section {
         stations.remove(target);
     }
 
-    public List<Station> getStations () {
+    public List<Station> getStations() {
         return Collections.unmodifiableList(stations);
     }
 
