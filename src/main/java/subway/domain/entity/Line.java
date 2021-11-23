@@ -24,4 +24,8 @@ public class Line {
     public boolean matchesName(String name) {
         return this.name.equals(name);
     }
+
+    public void deleteAllSection() {
+        section.deleteAllSection();
+    }
 }

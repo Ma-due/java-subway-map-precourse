@@ -25,7 +25,7 @@ public class StationRepository {
         return Collections.unmodifiableList(stations);
     }
 
-    public boolean delete(Station target) {
-        return stations.removeIf(station -> station.equals(target));
+    public void delete(Station target) {
+        stations.remove(target);
     }
 }

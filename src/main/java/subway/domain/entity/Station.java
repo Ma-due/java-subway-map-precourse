@@ -1,7 +1,11 @@
 package subway.domain.entity;
 
 public class Station {
-    private String name;
+    private static final boolean NOT_REGISTRATION = false;
+    private static final boolean REGISTRATION = true;
+
+    private final String name;
+    private boolean registrationOpt = NOT_REGISTRATION;
 
     public Station(String name) {
         this.name = name;
@@ -15,5 +19,16 @@ public class Station {
         return this.name.equals(name);
     }
 
-    // 추가 기능 구현
+    public void registrationStation() {
+        if (registrationOpt == NOT_REGISTRATION) {
+            registrationOpt = REGISTRATION;
+        }
+    }
+
+    public void cancelRegistrationStation() {
+        if (registrationOpt == REGISTRATION) {
+            registrationOpt = NOT_REGISTRATION;
+        }
+    }
+
 }

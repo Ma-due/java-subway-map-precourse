@@ -24,13 +24,15 @@ public class Section {
         stations.add(index, station);
     }
 
-    public void removeStation(Station station) {
-        stations.remove(station);
+    public void removeStation(Station target) {
+        stations.remove(target);
     }
 
     public List<Station> getStations () {
         return Collections.unmodifiableList(stations);
     }
 
-
+    public void deleteAllSection() {
+        stations.forEach(Station::cancelRegistrationStation);
+    }
 }

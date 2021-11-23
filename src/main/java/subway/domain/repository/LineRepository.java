@@ -28,6 +28,6 @@ public class LineRepository {
     }
 
     public boolean delete(Line target) {
-        return lines.removeIf(line -> lines.equals(target));
+        return lines.removeIf(line -> line.equals(target));
     }
 }
