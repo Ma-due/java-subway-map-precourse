@@ -1,11 +1,11 @@
 package subway.domain.entity;
 
 public class Station {
-    private static final boolean NOT_REGISTRATION = false;
-    private static final boolean REGISTRATION = true;
+    private static final int DEFAULT_REGISTRATION_COUNT = 0;
+    private static final int MININUM_STATION_NAME_LENGTH = 2;
 
     private final String name;
-    private boolean registrationOpt = NOT_REGISTRATION;
+    private int registrationCount = DEFAULT_REGISTRATION_COUNT;
 
     public Station(String name) {
         this.name = name;
@@ -20,15 +20,17 @@ public class Station {
     }
 
     public void registrationStation() {
-        if (registrationOpt == NOT_REGISTRATION) {
-            registrationOpt = REGISTRATION;
-        }
+        this.registrationCount++;
     }
 
     public void cancelRegistrationStation() {
-        if (registrationOpt == REGISTRATION) {
-            registrationOpt = NOT_REGISTRATION;
+        if (this.registrationCount > DEFAULT_REGISTRATION_COUNT) {
+            this.registrationCount--;
         }
+    }
+
+    public boolean isRegistrated() {
+        return this.registrationCount > DEFAULT_REGISTRATION_COUNT;
     }
 
 }
