@@ -1,39 +1,25 @@
 package subway.domain.entity;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Section {
-    private String lineName;
-    private List<String> stations;
+    private final List<String> stations = new LinkedList<>();
 
-    private Section(String lineName, String ascendingStation, String descendingStation) {
-        this.lineName = lineName;
-        this.stations = new LinkedList<>();
-        this.stations.add(ascendingStation);
-        this.stations.add(descendingStation);
+    public void addStation(List<String> stationList) {
+        stations.addAll(stationList);
     }
 
-    public Section of(String lineName, String ascendingStation, String descendingStation) {
-        return new Section(lineName, ascendingStation, descendingStation);
+    public void addStation(String station, int index) {
+        stations.add(index, station);
     }
 
-    public void addStation(String stationName, int index) {
-        this.stations.add(index, stationName);
-    }
-    public void deleteStation(String stationName) {
-        stations.removeIf(station -> station.equals(stationName));
+    public void removeStation(String station) {
+        stations.remove(station);
     }
 
-    public Section getSection() {
-        return this;
-    }
-
-    public String getLineName() {
-        return lineName;
-    }
-
-    public List<String> getStations() {
-        return stations;
+    public List<String> getStations () {
+        return Collections.unmodifiableList(stations);
     }
 }

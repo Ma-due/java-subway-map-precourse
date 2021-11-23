@@ -1,7 +1,10 @@
 package subway.domain.entity;
 
+import java.util.List;
+
 public class Line {
-    private String name;
+    private final String name;
+    private final Section section = new Section();
 
     public Line(String name) {
         this.name = name;
@@ -11,5 +14,11 @@ public class Line {
         return name;
     }
 
-    // 추가 기능 구현
+    public Section getSection() {
+        return section;
+    }
+
+    public List<String> getSectionList() {
+        return section.getStations();
+    }
 }
