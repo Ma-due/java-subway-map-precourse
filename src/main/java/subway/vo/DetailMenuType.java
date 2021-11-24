@@ -1,5 +1,7 @@
 package subway.vo;
 
+import java.util.Objects;
+
 public enum DetailMenuType {
     REGISTER("1", "등록"),
     DELETE("2", "삭제"),
@@ -9,9 +11,13 @@ public enum DetailMenuType {
     private final String type;
     private final String message;
 
-    DetailMenuType(String number, String message) {
-        this.type = number;
+    DetailMenuType(String type, String message) {
+        this.type = type;
         this.message = message;
+    }
+
+    public boolean matches(String type) {
+        return Objects.equals(this.type, type);
     }
 
     public String getType() {

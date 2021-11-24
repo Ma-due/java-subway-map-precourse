@@ -1,8 +1,8 @@
 package subway.controller;
 
+import subway.vo.DetailMenuType;
 import subway.vo.MenuType;
 
-import javax.print.attribute.SupportedValuesAttribute;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,29 +11,49 @@ import static subway.view.InputView.*;
 import static subway.view.OutputView.*;
 
 public class FrontController {
-    private final Map<String, SubwayController> adapter = new HashMap<>();
+    private final Map<MenuType, SubwayController> adapter = new HashMap<>();
 
     public SubwayController subwayController;
 
     public FrontController() {
-        adapter.put("1", new StationController());
-        adapter.put("2", new LineController());
-        adapter.put("3", new SectionController());
-        adapter.put("4", null);
-        adapter.put("Q", null);
+        adapter.put(MenuType.STATION, new StationController());
+        adapter.put(MenuType.LINE, new LineController());
+        adapter.put(MenuType.SECTION, new SectionController());
+        adapter.put(MenuType.MAP, null);
+        adapter.put(MenuType.QUIT, null);
     }
 
-    public void run() {
+    public SubwayController sendController(SubwayController subwayController) {
+        return subwayController;
+    }
+
+    public boolean run() {
         printMainMenu();
-        controllerHandle(inputOpt());
+        MenuType menuType = controllerHandle(inputOpt());
 
-        printDetailMenu();
+        if (menuType == MenuType.QUIT) return false;
+
+        printDetailMenu(menuType);
+        DetailMenuType detailMenuType = matchesDetailType(inputOpt());
+
+        execute(detailMenuType);
+
+        return true;
     }
 
-    public void controllerHandle(String input) {
-        MenuType menuType = matchesType(input);
+    private void execute(DetailMenuType detailMenuType) {
+        if (detailMenuType == DetailMenuType.REGISTER) subwayController.register();
+        if (detailMenuType == DetailMenuType.DELETE) subwayController.delete();
+        if (detailMenuType == DetailMenuType.READ) subwayController.find();
 
-        subwayController = adapter.get(menuType.getType());
+        subwayController.back();
+    }
+
+    public MenuType controllerHandle(String input) {
+        MenuType menuType = matchesType(input);
+        subwayController = adapter.get(menuType);
+
+        return menuType;
     }
 
     private MenuType matchesType(String type) {
@@ -43,7 +63,10 @@ public class FrontController {
                 .orElseThrow(NullPointerException::new);
     }
 
-    private boolean checkController(SubwayController subwayController) {
-        return subwayController == null;
+    private DetailMenuType matchesDetailType(String type) {
+        return Arrays.stream(DetailMenuType.values())
+                .filter(detailMenuType -> detailMenuType.matches(type))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
     }
 }

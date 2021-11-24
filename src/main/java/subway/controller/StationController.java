@@ -4,7 +4,6 @@ public class StationController implements SubwayController{
 
     @Override
     public void register() {
-
     }
 
     @Override
@@ -18,7 +17,7 @@ public class StationController implements SubwayController{
     }
 
     @Override
-    public void quit() {
+    public void back() {
 
     }
 }

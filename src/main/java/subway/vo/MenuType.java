@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Objects;
 
 public enum MenuType {
-    STATION("1", "역 관리",
+    STATION("1", "역",
             Arrays.asList(DetailMenuType.REGISTER, DetailMenuType.DELETE, DetailMenuType.READ, DetailMenuType.BACK)),
-    LINE("2", "노선 관리",
+    LINE("2", "노선",
             Arrays.asList(DetailMenuType.REGISTER, DetailMenuType.DELETE, DetailMenuType.READ, DetailMenuType.BACK)),
-    SECTION("3", "구간 관리",
+    SECTION("3", "구간",
             Arrays.asList(DetailMenuType.REGISTER, DetailMenuType.DELETE, DetailMenuType.BACK)),
-    MAP("4", "지하철 노선도 출력", Collections.emptyList()),
+    MAP("4", "지하철 노선도", Collections.emptyList()),
     QUIT("Q", "종료", Collections.emptyList());
 
     private final String type;
