@@ -23,6 +23,13 @@ public class LineRepository {
                 .findFirst();
     }
 
+    public Line find(Line target) {
+        return lines.stream()
+                .filter(line -> line.equals(target))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
+    }
+
     public List<Line> findAll() {
         return Collections.unmodifiableList(lines);
     }

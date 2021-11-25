@@ -32,7 +32,7 @@ public class StationService {
         return stationRepository.findAll();
     }
 
-    private Station findByName(String name) {
+    public Station findByName(String name) {
         return stationRepository.findByName(name).orElseThrow(IllegalArgumentException::new);
     }
 }

@@ -5,6 +5,8 @@ import subway.domain.entity.Section;
 import subway.domain.entity.Station;
 import subway.domain.repository.LineRepository;
 
+import java.util.List;
+
 public class LineService {
     private final LineRepository lineRepository;
 
@@ -33,8 +35,18 @@ public class LineService {
         lineRepository.delete(line);
     }
 
-    private Line findByName(String name) {
+    public void deleteSection(Line line, Station station) {
+        Line target = lineRepository.find(line);
+        Section section = target.getSection();
+        section.removeStation(station);
+    }
+
+    public Line findByName(String name) {
         return lineRepository.findByName(name).orElseThrow(NullPointerException::new);
+    }
+
+    public List<Line> findAllLine() {
+        return lineRepository.findAll();
     }
 
 }

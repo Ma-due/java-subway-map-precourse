@@ -13,6 +13,7 @@ public class Section {
     }
 
     public static Section of(Station firstStation, Station lastStation) {
+
         List<Station> stations = Stream.of(firstStation, lastStation)
                 .collect(Collectors.toList());
 
@@ -21,10 +22,12 @@ public class Section {
 
     public void addStation(int index, Station station) {
         stations.add(index, station);
+        station.registrationStation();
     }
 
     public void removeStation(Station target) {
         stations.remove(target);
+        target.cancelRegistrationStation();
     }
 
     public List<Station> getStations() {

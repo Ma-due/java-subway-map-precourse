@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.domain.entity.Station;
 import subway.vo.DetailMenuType;
 import subway.vo.MenuType;
 
@@ -15,16 +16,14 @@ public class FrontController {
 
     public SubwayController subwayController;
 
-    public FrontController() {
-        adapter.put(MenuType.STATION, new StationController());
-        adapter.put(MenuType.LINE, new LineController());
-        adapter.put(MenuType.SECTION, new SectionController());
+    public FrontController(StationController stationController,
+                           LineController lineController,
+                           SectionController sectionController) {
+        adapter.put(MenuType.STATION, stationController);
+        adapter.put(MenuType.LINE, lineController);
+        adapter.put(MenuType.SECTION, sectionController);
         adapter.put(MenuType.MAP, null);
         adapter.put(MenuType.QUIT, null);
-    }
-
-    public SubwayController sendController(SubwayController subwayController) {
-        return subwayController;
     }
 
     public boolean run() {
@@ -47,6 +46,7 @@ public class FrontController {
         if (detailMenuType == DetailMenuType.READ) subwayController.find();
 
         subwayController.back();
+
     }
 
     public MenuType controllerHandle(String input) {

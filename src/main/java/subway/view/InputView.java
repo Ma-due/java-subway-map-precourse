@@ -10,4 +10,12 @@ public class InputView {
     public static String inputOpt() {
         return scanner.nextLine();
     }
+
+    public static String inputName() {
+        return scanner.nextLine();
+    }
+
+    public static String inputIndex() {
+        return scanner.nextLine();
+    }
 }
