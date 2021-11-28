@@ -29,6 +29,10 @@ public class SubwayInitializer {
             );
 
     private SubwayInitializer() {
+
+    }
+
+    public static FrontController init() {
         StationRepository stationRepository = new StationRepository(stationInit());
         LineRepository lineRepository = new LineRepository(lineInit());
 
@@ -40,16 +44,15 @@ public class SubwayInitializer {
         SectionController sectionController = new SectionController(lineService, stationService);
 
         FrontController frontController = new FrontController(stationController, lineController, sectionController);
+
+        return frontController;
     }
 
-    public static SubwayInitializer init() {
-        return new SubwayInitializer();
-    }
-    private List<Station> stationInit() {
+    private static List<Station> stationInit() {
         return DEFAULT_STATION_INFO.stream().map(Station::new).collect(Collectors.toList());
     }
 
-    private List<Line> lineInit() {
+    private static List<Line> lineInit() {
         return DEFAULT_SECTION_INFO.stream()
                 .map(info -> new Line(info.getLineInfo(), Section.from(info.getSectionInfo())))
                 .collect(Collectors.toList());
