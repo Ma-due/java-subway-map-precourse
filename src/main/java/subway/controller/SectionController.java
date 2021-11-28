@@ -8,12 +8,12 @@ import subway.service.StationService;
 import static subway.view.InputView.*;
 
 public class SectionController implements SubwayController {
-    private final StationService stationService;
     private final LineService lineService;
+    private final StationService stationService;
 
-    public SectionController(StationService stationService, LineService lineService) {
-        this.stationService = stationService;
+    public SectionController(LineService lineService, StationService stationService) {
         this.lineService = lineService;
+        this.stationService = stationService;
     }
 
     @Override
@@ -34,12 +34,17 @@ public class SectionController implements SubwayController {
     }
 
     @Override
-    public void find() {
+    public void lookup() {
 
     }
 
     @Override
     public void back() {
+
+    }
+
+    @Override
+    public void subwayMapInfo() {
 
     }
 }

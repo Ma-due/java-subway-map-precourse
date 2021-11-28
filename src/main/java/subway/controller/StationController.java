@@ -27,12 +27,16 @@ public class StationController implements SubwayController{
     }
 
     @Override
-    public void find() {
+    public void lookup() {
         List<Station> stationList = stationService.findAllStation();
         OutputView.printStationList(stationList);
     }
 
     @Override
     public void back() {
+    }
+
+    @Override
+    public void subwayMapInfo() {
     }
 }

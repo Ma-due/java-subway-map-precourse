@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.domain.entity.Station;
 import subway.vo.DetailMenuType;
 import subway.vo.MenuType;
 
@@ -22,7 +21,7 @@ public class FrontController {
         adapter.put(MenuType.STATION, stationController);
         adapter.put(MenuType.LINE, lineController);
         adapter.put(MenuType.SECTION, sectionController);
-        adapter.put(MenuType.MAP, null);
+        adapter.put(MenuType.MAP, lineController);
         adapter.put(MenuType.QUIT, null);
     }
 
@@ -30,6 +29,10 @@ public class FrontController {
         printMainMenu();
         MenuType menuType = controllerHandle(inputOpt());
 
+        if (menuType == MenuType.MAP) {
+
+            return true;
+        }
         if (menuType == MenuType.QUIT) return false;
 
         printDetailMenu(menuType);
@@ -43,7 +46,7 @@ public class FrontController {
     private void execute(DetailMenuType detailMenuType) {
         if (detailMenuType == DetailMenuType.REGISTER) subwayController.register();
         if (detailMenuType == DetailMenuType.DELETE) subwayController.delete();
-        if (detailMenuType == DetailMenuType.READ) subwayController.find();
+        if (detailMenuType == DetailMenuType.READ) subwayController.lookup();
 
         subwayController.back();
 

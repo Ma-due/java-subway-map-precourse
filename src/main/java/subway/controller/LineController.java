@@ -8,6 +8,7 @@ import subway.service.StationService;
 import java.util.List;
 
 import static subway.view.InputView.*;
+import static subway.view.OutputView.*;
 
 public class LineController implements SubwayController{
     private final LineService lineService;
@@ -31,12 +32,17 @@ public class LineController implements SubwayController{
     }
 
     @Override
-    public void find() {
+    public void lookup() {
         List<Line> lineList = lineService.findAllLine();
     }
 
     @Override
     public void back() {
 
+    }
+
+    @Override
+    public void subwayMapInfo() {
+        printSubwayMap(lineService.findAllLine());
     }
 }
