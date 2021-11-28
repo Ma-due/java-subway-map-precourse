@@ -1,5 +1,6 @@
 package subway.view;
 
+import subway.domain.entity.Line;
 import subway.domain.entity.Station;
 import subway.vo.MenuType;
 
@@ -40,6 +41,22 @@ public class OutputView {
 
     public static void printStationList(List<Station> stationList) {
         for (Station station : stationList) {
+            System.out.printf(INFORMATION_MESSAGE_FORMAT, station);
+        }
+    }
+
+    public static void printSubwayMap(List<Line> mapInfo) {
+        System.out.println(SUBWAY_MAP_PRINT_HEADER);
+        mapInfo.forEach(OutputView::printLineInfo);
+    }
+
+    private static void printLineInfo(Line line) {
+        System.out.printf(INFORMATION_MESSAGE_FORMAT, line.getName());
+        System.out.println(SUBWAY_MAP_DELIMITER);
+
+        List<Station> stations = line.getSection().getStations();
+
+        for (Station station : stations) {
             System.out.printf(INFORMATION_MESSAGE_FORMAT, station);
         }
     }

@@ -20,6 +20,11 @@ public class Section {
         return new Section(stations);
     }
 
+    public static Section from(List<String> info) {
+        List<Station> stations = info.stream().map(Station::new).collect(Collectors.toList());
+        return new Section(stations);
+    }
+
     public void addStation(int index, Station station) {
         stations.add(index, station);
         station.registrationStation();
